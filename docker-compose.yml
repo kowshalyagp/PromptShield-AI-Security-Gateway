@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: promptshield_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persistent storage for SQLite database file
+      - backend_db:/app/db_data
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./db_data/promptshield.db
+      - SECRET_KEY=supersecretdevelopmentkeythatisthirtytwobyteslong
+      - ALGORITHM=HS256
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - RATE_LIMIT_WINDOW_SECONDS=60
+      - RATE_LIMIT_MAX_REQUESTS=10
+      - RISK_THRESHOLD_MALICIOUS=70
+      - RISK_THRESHOLD_SUSPICIOUS=30
+      - LOGGING_LEVEL=INFO
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Build stage passes Vite base URL pointing to host gateway
+        - VITE_API_BASE_URL=http://localhost:8000/api/v1
+    container_name: promptshield_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  backend_db:
