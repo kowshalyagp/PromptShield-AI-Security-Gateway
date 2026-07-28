@@ -267,5 +267,5 @@ $env:PYTHONPATH="."
 
 ## License & Contributors
 
-*   **Developer:** Kowsalya (Final Year Project)
+*   **Developer:** Kowsalya G P
 *   **License:** MIT License. See [LICENSE](LICENSE) for more details.
