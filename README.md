@@ -184,7 +184,19 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 1. Go to the root directory containing `docker-compose.yml`.
 2. Configure your external Gemini key in the environment shell:
    ```bash
-   export GEMINI_API_KEY="AIzaSyYourKeyHere"
+   ### Configure your Gemini API key
+
+**Linux/macOS**
+
+```bash
+export GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+```
+
+**Windows PowerShell**
+
+```powershell
+$env:GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+```
    ```
 3. Build and launch the containers in detached mode:
    ```bash
@@ -255,5 +267,5 @@ $env:PYTHONPATH="."
 
 ## License & Contributors
 
-*   **Developer:** Rohit (Final Year Project)
+*   **Developer:** Kowsalya (Final Year Project)
 *   **License:** MIT License. See [LICENSE](LICENSE) for more details.
